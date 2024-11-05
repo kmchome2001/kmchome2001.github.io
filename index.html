@@ -8,7 +8,18 @@
   </head>
 <audio id="alarmSound" src="alarmSound.mp3" preload="auto"></audio>
 
-    <script>
+    
+  <body>
+    <div class="container" style="text-algin:center">
+    <h1>高雄市扯鈴協會</h1>
+    第一段時間：<input type="text" name="T1" id="T1" size="5" placeholder="請輸入秒數"><p></p>
+    第二段時間：<input type="text" name="T2" id="T2" size="5" placeholder="請輸入秒數"><p></p>
+    第三段時間：<input type="text" name="T3" id="T3" size="5" placeholder="請輸入秒數"><p></p>
+    <button type="button" class="btn btn-primary" id="startButton">開始!!</button><label id="display"></label>
+    </div>
+
+
+<script>
         document.getElementById('startButton').addEventListener('click', function() {
             let timeInput = document.getElementById('T1').value;
             let time = parseInt(timeInput);
@@ -32,14 +43,6 @@
                 }
             }, 1000);
         });
-    </script>  
-  <body>
-    <div class="container" style="text-algin:center">
-    <h1>高雄市扯鈴協會</h1>
-    第一段時間：<input type="text" name="T1" id="T1" size="5" placeholder="請輸入秒數"><p></p>
-    第二段時間：<input type="text" name="T2" id="T2" size="5" placeholder="請輸入秒數"><p></p>
-    第三段時間：<input type="text" name="T3" id="T3" size="5" placeholder="請輸入秒數"><p></p>
-    <button type="button" class="btn btn-primary" id="startButton">開始!!</button><label id="display"></label>
-    </div>
+    </script>      
   </body>
 </html>

@@ -53,7 +53,7 @@
                 if (!paused) {
                     console.log(`Timer ${index + 1}: ${count}`);
                     count--;
-                    if (count < 1) {
+                    if (count <=0) {
                         clearInterval(intervals[index]);
                         document.getElementById('alarmSound').play();
                         if (index < timers.length - 1) {

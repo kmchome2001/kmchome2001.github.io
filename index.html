@@ -9,16 +9,27 @@
 <audio id="alarmSound" src="alarmSound.mp3" preload="auto"></audio>
 
     
-  <body>
-    <div class="container" style="text-algin:center">
-    <h1>高雄市扯鈴協會</h1>
-    <input type="text" id="timer1" placeholder="輸入秒數">
-    <input type="text" id="timer2" placeholder="輸入秒數">
-    <input type="text" id="timer3" placeholder="輸入秒數">
-    <button onclick="startTimers()">開始倒數</button>
-    <button onclick="togglePause()">暫停/繼續</button>
-    <button onclick="resetTimers()">重新倒數</button>
-    <audio id="alarmSound" src="alarmSound.mp3"></audio>
+   <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-4">
+                <input type="text" id="timer1" class="form-control mb-2" placeholder="輸入秒數">
+            </div>
+            <div class="col-md-4">
+                <input type="text" id="timer2" class="form-control mb-2" placeholder="輸入秒數">
+            </div>
+            <div class="col-md-4">
+                <input type="text" id="timer3" class="form-control mb-2" placeholder="輸入秒數">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <button class="btn btn-primary mr-2" onclick="startTimers()">開始倒數</button>
+                <button class="btn btn-warning mr-2" onclick="togglePause()">暫停/繼續</button>
+                <button class="btn btn-danger" onclick="resetTimers()">重新倒數</button>
+            </div>
+        </div>
+        <audio id="alarmSound" src="alarm.mp3"></audio>
+    </div>
 
     <script>
         let intervals = [];
@@ -44,9 +55,8 @@
                     count--;
                     if (count < 0) {
                         clearInterval(intervals[index]);
-                        if (index === timers.length - 1) {
-                            document.getElementById('alarmSound').play();
-                        } else {
+                        document.getElementById('alarmSound').play();
+                        if (index < timers.length - 1) {
                             startTimer(index + 1);
                         }
                     }
@@ -69,6 +79,5 @@
             startTimers();
         }
     </script>
-    </div>      
-  </body>
+</body>
 </html>

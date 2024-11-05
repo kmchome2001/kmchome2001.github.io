@@ -6,7 +6,7 @@
     <script src="/bootstrap-5.0.2-dist/js/bootstrap.js"></script>
     <link href="/bootstrap-5.0.2-dist/css/bootstrap.css" rel="stylesheet">
   </head>
-<audio id="alarmSound" src="path_to_your_sound_file.mp3" preload="auto"></audio>
+<audio id="alarmSound" src="alarmSound.mp3" preload="auto"></audio>
 
     <script>
         document.getElementById('startButton').addEventListener('click', function() {
@@ -39,7 +39,7 @@
     第一段時間：<input type="text" name="T1" id="T1" size="5" placeholder="請輸入秒數"><p></p>
     第二段時間：<input type="text" name="T2" id="T2" size="5" placeholder="請輸入秒數"><p></p>
     第三段時間：<input type="text" name="T3" id="T3" size="5" placeholder="請輸入秒數"><p></p>
-    <button type="button" class="btn btn-primary" id="startButton">開始!!</button>
+    <button type="button" class="btn btn-primary" id="startButton">開始!!</button><label id="display"></label>
     </div>
   </body>
 </html>

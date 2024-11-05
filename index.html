@@ -20,29 +20,48 @@
 
 
 <script>
-        document.getElementById('startButton').addEventListener('click', function() {
-            let timeInput = document.getElementById('T1').value;
-            let time = parseInt(timeInput);
-            const display = document.getElementById('display');
-            const alarmSound = document.getElementById('alarmSound');
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('startButton').addEventListener('click', function() {
+                const timeInputs = [
+                    parseInt(document.getElementById('T1').value),
+                    parseInt(document.getElementById('T2').value),
+                    parseInt(document.getElementById('T3').value)
+                ];
+                const display = document.getElementById('display');
+                const alarmSound = document.getElementById('alarmSound');
 
-            if (isNaN(time) || time <= 0) {
-                alert("請輸入有效的正整數秒數");
-                return;
-            }
-
-            display.textContent = `倒數顯示: ${time} 秒`;
-            const countdown = setInterval(() => {
-                time--;
-                display.textContent = `倒數顯示: ${time} 秒`;
-
-                if (time <= 0) {
-                    clearInterval(countdown);
-                    alarmSound.play();
-                    display.textContent = "時間到!";
+                // 检查每个输入是否为有效的正整数
+                if (timeInputs.some(time => isNaN(time) || time <= 0)) {
+                    alert("請確保所有輸入均為有效的正整數秒數");
+                    return;
                 }
-            }, 1000);
+
+                let currentIndex = 0;
+
+                function countdown(time) {
+                    display.textContent = `倒數顯示: ${time} 秒`;
+                    const countdownInterval = setInterval(() => {
+                        time--;
+                        display.textContent = `倒數顯示: ${time} 秒`;
+
+                        if (time <= 0) {
+                            clearInterval(countdownInterval);
+                            alarmSound.play();
+                            display.textContent = `時間到! 第${currentIndex + 1}個倒數結束`;
+
+                            currentIndex++;
+                            // 继续下一个倒计时
+                            if (currentIndex < timeInputs.length) {
+                                countdown(timeInputs[currentIndex]);
+                            }
+                        }
+                    }, 1000);
+                }
+
+                // 开始第一个倒计时
+                countdown(timeInputs[currentIndex]);
+            });
         });
-    </script>      
+    </script>  
   </body>
 </html>

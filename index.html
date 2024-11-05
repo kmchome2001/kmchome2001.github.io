@@ -8,23 +8,21 @@
   </head>
 <audio id="alarmSound" src="alarmSound.mp3" preload="auto"></audio>
 
-    
-   <div class="container">
-       <div class="row text-center">高雄市扯鈴協會</div>
-        <div class="row text-center"><label>第一段時間：</label>
+<body>    
+    <div class="container mt-5">
+        <div class="row">
             <div class="col-md-4">
                 <input type="text" id="timer1" class="form-control mb-2" placeholder="輸入秒數">
+                <div id="display1" class="text-center"></div>
             </div>
-        </div>
-        <div class="row text-center"><label>第二段時間：</label>
             <div class="col-md-4">
                 <input type="text" id="timer2" class="form-control mb-2" placeholder="輸入秒數">
+                <div id="display2" class="text-center"></div>
             </div>
-        </div>
-       <div class="row text-center"><label>第三段時間：</label>
             <div class="col-md-4">
                 <input type="text" id="timer3" class="form-control mb-2" placeholder="輸入秒數">
-            </div><p></p>
+                <div id="display3" class="text-center"></div>
+            </div>
         </div>
         <div class="row">
             <div class="col-md-12 text-center">
@@ -33,7 +31,7 @@
                 <button class="btn btn-danger" onclick="resetTimers()">重新倒數</button>
             </div>
         </div>
-        <audio id="alarmSound" src="alarmSound.mp3"></audio>
+        <audio id="alarmSound" src="alarm.mp3"></audio>
     </div>
 
     <script>
@@ -56,9 +54,9 @@
             let count = timers[index];
             intervals[index] = setInterval(() => {
                 if (!paused) {
-                    console.log(`Timer ${index + 1}: ${count}`);
+                    document.getElementById(`display${index + 1}`).innerText = `剩餘時間: ${count} 秒`;
                     count--;
-                    if (count <=0) {
+                    if (count < 0) {
                         clearInterval(intervals[index]);
                         document.getElementById('alarmSound').play();
                         if (index < timers.length - 1) {
@@ -81,6 +79,9 @@
         function resetTimers() {
             intervals.forEach(interval => clearInterval(interval));
             paused = false;
+            document.getElementById('display1').innerText = '';
+            document.getElementById('display2').innerText = '';
+            document.getElementById('display3').innerText = '';
             startTimers();
         }
     </script>

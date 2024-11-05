@@ -12,57 +12,63 @@
   <body>
     <div class="container" style="text-algin:center">
     <h1>高雄市扯鈴協會</h1>
-    第一段時間：<input type="text" name="T1" id="T1" size="5" placeholder="請輸入秒數"><p></p>
-    第二段時間：<input type="text" name="T2" id="T2" size="5" placeholder="請輸入秒數"><p></p>
-    第三段時間：<input type="text" name="T3" id="T3" size="5" placeholder="請輸入秒數"><p></p>
-    <button type="button" class="btn btn-primary" id="startButton">開始!!</button><label id="Dsp2"></label><label id="display"></label>
-    </div>
+    <input type="text" id="timer1" placeholder="輸入秒數">
+    <input type="text" id="timer2" placeholder="輸入秒數">
+    <input type="text" id="timer3" placeholder="輸入秒數">
+    <button onclick="startTimers()">開始倒數</button>
+    <button onclick="togglePause()">暫停/繼續</button>
+    <button onclick="resetTimers()">重新倒數</button>
+    <audio id="alarmSound" src="alarm.mp3"></audio>
 
+    <script>
+        let intervals = [];
+        let paused = false;
+        let timers = [];
 
-<script>
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('startButton').addEventListener('click', function() {
-                const timeInputs = [
-                    parseInt(document.getElementById('T1').value),
-                    parseInt(document.getElementById('T2').value),
-                    parseInt(document.getElementById('T3').value)
-                ];
-                const display = document.getElementById('display');
-                const display2 = document.getElementById('Dsp2');
-                const alarmSound = document.getElementById('alarmSound');
+        function startTimers() {
+            timers = [
+                parseInt(document.getElementById('timer1').value),
+                parseInt(document.getElementById('timer2').value),
+                parseInt(document.getElementById('timer3').value)
+            ];
+            startTimer(0);
+        }
 
-                // 检查每个输入是否为有效的正整数
-                if (timeInputs.some(time => isNaN(time) || time <= 0)) {
-                    alert("請確保所有輸入均為有效的正整數秒數");
-                    return;
-                }
+        function startTimer(index) {
+            if (index >= timers.length) return;
 
-                let currentIndex = 0;
-
-                function countdown(time) {
-                    display.textContent = `倒數顯示: ${time} 秒`;
-                    const countdownInterval = setInterval(() => {
-                        time--;
-                        display.textContent = `倒數顯示: ${time} 秒`;
-
-                        if (time <= 0) {
-                            clearInterval(countdownInterval);
-                            alarmSound.play();
-                            display2.textContent = `時間到! 第${currentIndex + 1}個倒數結束。`;
-
-                            currentIndex++;
-                            // 继续下一个倒计时
-                            if (currentIndex < timeInputs.length) {
-                                countdown(timeInputs[currentIndex]);
-                            }
+            let count = timers[index];
+            intervals[index] = setInterval(() => {
+                if (!paused) {
+                    console.log(`Timer ${index + 1}: ${count}`);
+                    count--;
+                    if (count < 0) {
+                        clearInterval(intervals[index]);
+                        if (index === timers.length - 1) {
+                            document.getElementById('alarmSound').play();
+                        } else {
+                            startTimer(index + 1);
                         }
-                    }, 1000);
+                    }
                 }
+            }, 1000);
+        }
 
-                // 开始第一个倒计时
-                countdown(timeInputs[currentIndex]);
-            });
-        });
-    </script>  
+        function togglePause() {
+            paused = !paused;
+            if (!paused) {
+                console.log("計時繼續");
+            } else {
+                console.log("計時暫停");
+            }
+        }
+
+        function resetTimers() {
+            intervals.forEach(interval => clearInterval(interval));
+            paused = false;
+            startTimers();
+        }
+    </script>
+    </div>      
   </body>
 </html>

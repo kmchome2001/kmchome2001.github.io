@@ -6,13 +6,40 @@
     <script src="/bootstrap-5.0.2-dist/js/bootstrap.js"></script>
     <link href="/bootstrap-5.0.2-dist/css/bootstrap.css" rel="stylesheet">
   </head>
+<audio id="alarmSound" src="path_to_your_sound_file.mp3" preload="auto"></audio>
+
+    <script>
+        document.getElementById('startButton').addEventListener('click', function() {
+            let timeInput = document.getElementById('T1').value;
+            let time = parseInt(timeInput);
+            const display = document.getElementById('display');
+            const alarmSound = document.getElementById('alarmSound');
+
+            if (isNaN(time) || time <= 0) {
+                alert("請輸入有效的正整數秒數");
+                return;
+            }
+
+            display.textContent = `倒數顯示: ${time} 秒`;
+            const countdown = setInterval(() => {
+                time--;
+                display.textContent = `倒數顯示: ${time} 秒`;
+
+                if (time <= 0) {
+                    clearInterval(countdown);
+                    alarmSound.play();
+                    display.textContent = "時間到!";
+                }
+            }, 1000);
+        });
+    </script>  
   <body>
     <div class="container" style="text-algin:center">
     <h1>高雄市扯鈴協會</h1>
     第一段時間：<input type="text" name="T1" id="T1" size="5" placeholder="請輸入秒數"><p></p>
     第二段時間：<input type="text" name="T2" id="T2" size="5" placeholder="請輸入秒數"><p></p>
     第三段時間：<input type="text" name="T3" id="T3" size="5" placeholder="請輸入秒數"><p></p>
-    <button type="button" class="btn btn-primary">開始!!</button>
+    <button type="button" class="btn btn-primary" id="startButton">開始!!</button>
     </div>
   </body>
 </html>

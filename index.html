@@ -15,7 +15,7 @@
     第一段時間：<input type="text" name="T1" id="T1" size="5" placeholder="請輸入秒數"><p></p>
     第二段時間：<input type="text" name="T2" id="T2" size="5" placeholder="請輸入秒數"><p></p>
     第三段時間：<input type="text" name="T3" id="T3" size="5" placeholder="請輸入秒數"><p></p>
-    <button type="button" class="btn btn-primary" id="startButton">開始!!</button><label id="display"></label>
+    <button type="button" class="btn btn-primary" id="startButton">開始!!</button><label id="Dsp2"></label><label id="display"></label>
     </div>
 
 
@@ -28,6 +28,7 @@
                     parseInt(document.getElementById('T3').value)
                 ];
                 const display = document.getElementById('display');
+                const display2 = document.getElementById('Dsp2');
                 const alarmSound = document.getElementById('alarmSound');
 
                 // 检查每个输入是否为有效的正整数
@@ -47,7 +48,7 @@
                         if (time <= 0) {
                             clearInterval(countdownInterval);
                             alarmSound.play();
-                            display.textContent = `時間到! 第${currentIndex + 1}個倒數結束`;
+                            display2.textContent = `時間到! 第${currentIndex + 1}個倒數結束`;
 
                             currentIndex++;
                             // 继续下一个倒计时

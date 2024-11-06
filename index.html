@@ -18,7 +18,7 @@
                 <button class="btn btn-primary mr-2" onclick="startCountdown()">開始倒數</button>
                 <button class="btn btn-warning mr-2" onclick="togglePause()">暫停/繼續</button>
                 <button class="btn btn-danger" onclick="resetCountdown()">重新倒數</button>
-                
+                <button class="btn btn-info" onclick="testSounds()">測試音效檔</button>
             </div>
         </div>
         <audio id="alarmSound" src="timeupSound.mp3"></audio>
@@ -85,6 +85,35 @@
             clearInterval(interval);
             paused = false;
             document.getElementById('display').innerText = '';
+        }
+
+        function testSounds() {
+            const sounds = [
+                document.getElementById('startSound'),
+                document.getElementById('tickSound1'),
+                document.getElementById('tickSound2'),
+                document.getElementById('tickSound3'),
+                document.getElementById('tickSound4'),
+                document.getElementById('tickSound5'),
+                document.getElementById('alarmSound')
+            ];
+
+            let index = 0;
+
+            function playNextSound() {
+                if (index < sounds.length) {
+                    sounds[index].play().then(() => {
+                        index++;
+                        playNextSound();
+                    }).catch(error => {
+                        console.log("音效播放失敗：", error);
+                        index++;
+                        playNextSound();
+                    });
+                }
+            }
+
+            playNextSound();
         }
     </script>
 </body>

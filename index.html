@@ -14,7 +14,7 @@
         <div class="row">
             <div class="col-md-12 text-center">
                 <div id="display" class="display-1"></div>
-                <input type="text" id="timeInput" class="form-control mb-2" placeholder="輸入時間 (分:秒)">
+                <input type="text" id="timeInput" class="form-control mb-2" placeholder="輸入時間 (分:秒)" oninput="updateDisplay();">
                 <button class="btn btn-primary mr-2" onclick="startCountdown()">開始倒數</button>
                 <button class="btn btn-warning mr-2" onclick="togglePause()">暫停/繼續</button>
                 <button class="btn btn-danger" onclick="resetCountdown()">重新倒數</button>
@@ -28,7 +28,15 @@
         let interval;
         let paused = false;
         let totalSeconds;
-
+        function updateDisplay() {
+            const timeInput = document.getElementById('timeInput').value;
+            const [minutes, seconds] = timeInput.split(':').map(Number);
+            if (!isNaN(minutes) && !isNaN(seconds)) {
+                document.getElementById('display').innerText = `設定時間: ${minutes} 分 ${seconds} 秒`;
+            } else {
+                document.getElementById('display').innerText = '';
+            }
+        }
         function startCountdown() {
             const timeInput = document.getElementById('timeInput').value;
             const [minutes, seconds] = timeInput.split(':').map(Number);

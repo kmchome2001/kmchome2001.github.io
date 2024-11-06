@@ -40,7 +40,7 @@
             const timeInput = document.getElementById('timeInput').value;
             const [minutes, seconds] = timeInput.split(':').map(Number);
             if (!isNaN(minutes) && !isNaN(seconds)) {
-                document.getElementById('display').innerText = `設定時間: ${minutes} 分 ${seconds} 秒`;
+                document.getElementById('display').innerText = `設定時間: ${String(minutes).padStart(2, '0')} 分 ${String(seconds).padStart(2, '0')} 秒`;
             } else {
                 document.getElementById('display').innerText = '';
             }
@@ -58,7 +58,7 @@
                     if (!paused) {
                         const mins = Math.floor(elapsedSeconds / 60);
                         const secs = elapsedSeconds % 60;
-                        document.getElementById('display').innerText = `${mins} : ${secs} `;
+                        document.getElementById('display').innerText = ` ${String(mins).padStart(2, '0')} : ${String(secs).padStart(2, '0')} `;
                         elapsedSeconds++;
 
                         if (elapsedSeconds > totalSeconds) {

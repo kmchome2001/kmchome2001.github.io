@@ -7,8 +7,20 @@
     <link href="/bootstrap-5.0.2-dist/css/bootstrap.css" rel="stylesheet">
   </head>
 <audio id="alarmSound" src="alarmSound.mp3" preload="auto"></audio>
-
-<body style="opacity:0.4; background-image:url('106237.gif');">    
+<style>  
+body::after {
+  content: "";
+  background: url(106237.gif);
+  opacity: 0.4;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;   
+}
+  </style>
+<body>    
     <div class="container">
       <div class="row">
         <div class="col text-center fs-1">高雄市扯鈴協會</div>

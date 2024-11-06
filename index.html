@@ -44,6 +44,7 @@ body::after {
                 <button class="btn btn-primary mr-2" onclick="startTimers()">開始倒數</button>
                 <button class="btn btn-warning mr-2" onclick="togglePause()">暫停/繼續</button>
                 <button class="btn btn-danger" onclick="resetTimers()">重新倒數</button>
+              <button class="btn btn-info" onclick="testSound()">測試音效</button>
             </div>
         </div>
        
@@ -89,8 +90,10 @@ body::after {
             } else {
                 console.log("計時暫停");
             }
+        }        
+        function testSound() {
+            document.getElementById('alarmSound').play();
         }
-
         function resetTimers() {
             intervals.forEach(interval => clearInterval(interval));
             paused = false;

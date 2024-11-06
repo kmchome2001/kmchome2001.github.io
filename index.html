@@ -34,36 +34,38 @@
         let interval;
         let paused = false;
         let totalSeconds;
+        let elapsedSeconds = 0;
 
-        function updateDisplay() {
+        /*function updateDisplay() {
             const timeInput = document.getElementById('timeInput').value;
             const [minutes, seconds] = timeInput.split(':').map(Number);
             if (!isNaN(minutes) && !isNaN(seconds)) {
-                document.getElementById('display').innerText = ` ${minutes} : ${seconds} `;
+                document.getElementById('display').innerText = `設定時間: ${minutes} 分 ${seconds} 秒`;
             } else {
                 document.getElementById('display').innerText = '';
             }
-        }
+        }*/
 
         function startCountdown() {
             const timeInput = document.getElementById('timeInput').value;
             const [minutes, seconds] = timeInput.split(':').map(Number);
             totalSeconds = (minutes * 60) + seconds;
+            elapsedSeconds = 0;
 
             document.getElementById('startSound').play().then(() => {
                 clearInterval(interval);
                 interval = setInterval(() => {
                     if (!paused) {
-                        const mins = Math.floor(totalSeconds / 60);
-                        const secs = totalSeconds % 60;
-                        document.getElementById('display').innerText = ` ${mins} : ${secs} `;
-                        totalSeconds--;
+                        const mins = Math.floor(elapsedSeconds / 60);
+                        const secs = elapsedSeconds % 60;
+                        document.getElementById('display').innerText = `${mins} : ${secs} `;
+                        elapsedSeconds++;
 
-                        if (totalSeconds < 0) {
+                        if (elapsedSeconds > totalSeconds) {
                             clearInterval(interval);
                             document.getElementById('alarmSound').play();
-                        } else if (totalSeconds < 5) {
-                            document.getElementById(`tickSound${5 - totalSeconds}`).play();
+                        } else if (totalSeconds - elapsedSeconds < 5) {
+                            document.getElementById(`tickSound${5 - (totalSeconds - elapsedSeconds)}`).play();
                         }
                     }
                 }, 1000);
@@ -84,6 +86,7 @@
         function resetCountdown() {
             clearInterval(interval);
             paused = false;
+            elapsedSeconds = 0;
             document.getElementById('display').innerText = '';
         }
 

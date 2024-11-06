@@ -36,7 +36,7 @@
         let totalSeconds;
         let elapsedSeconds = 0;
 
-        /*function updateDisplay() {
+        function updateDisplay() {
             const timeInput = document.getElementById('timeInput').value;
             const [minutes, seconds] = timeInput.split(':').map(Number);
             if (!isNaN(minutes) && !isNaN(seconds)) {
@@ -44,7 +44,7 @@
             } else {
                 document.getElementById('display').innerText = '';
             }
-        }*/
+        }
 
         function startCountdown() {
             const timeInput = document.getElementById('timeInput').value;
@@ -87,7 +87,7 @@
             clearInterval(interval);
             paused = false;
             elapsedSeconds = 0;
-            document.getElementById('display').innerText = '';
+            document.getElementById('display').innerText = '00:00';
         }
 
         function testSounds() {

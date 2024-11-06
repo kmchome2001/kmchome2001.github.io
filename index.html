@@ -32,7 +32,7 @@
             const timeInput = document.getElementById('timeInput').value;
             const [minutes, seconds] = timeInput.split(':').map(Number);
             if (!isNaN(minutes) && !isNaN(seconds)) {
-                document.getElementById('display').innerText = `設定時間: ${minutes} 分 ${seconds} 秒`;
+                document.getElementById('display').innerText = ` ${minutes} : ${seconds} `;
             } else {
                 document.getElementById('display').innerText = '';
             }
@@ -47,7 +47,7 @@
                 if (!paused) {
                     const mins = Math.floor(totalSeconds / 60);
                     const secs = totalSeconds % 60;
-                    document.getElementById('display').innerText = `剩餘時間: ${mins} 分 ${secs} 秒`;
+                    document.getElementById('display').innerText = ` ${mins} : ${secs} `;
                     totalSeconds--;
 
                     if (totalSeconds < 0) {

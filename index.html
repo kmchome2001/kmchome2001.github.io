@@ -22,12 +22,19 @@
             </div>
         </div>
         <audio id="alarmSound" src="timeupSound.mp3"></audio>
+        <audio id="startSound" src="startSound.mp3"></audio>
+        <audio id="tickSound1" src="5Sound.mp3"></audio>
+        <audio id="tickSound2" src="4Sound.mp3"></audio>
+        <audio id="tickSound3" src="3Sound.mp3"></audio>
+        <audio id="tickSound4" src="2Sound.mp3"></audio>
+        <audio id="tickSound5" src="1Sound.mp3"></audio>
     </div>
 
     <script>
         let interval;
         let paused = false;
         let totalSeconds;
+
         function updateDisplay() {
             const timeInput = document.getElementById('timeInput').value;
             const [minutes, seconds] = timeInput.split(':').map(Number);
@@ -37,25 +44,32 @@
                 document.getElementById('display').innerText = '';
             }
         }
+
         function startCountdown() {
             const timeInput = document.getElementById('timeInput').value;
             const [minutes, seconds] = timeInput.split(':').map(Number);
             totalSeconds = (minutes * 60) + seconds;
 
-            clearInterval(interval);
-            interval = setInterval(() => {
-                if (!paused) {
-                    const mins = Math.floor(totalSeconds / 60);
-                    const secs = totalSeconds % 60;
-                    document.getElementById('display').innerText = ` ${mins} : ${secs} `;
-                    totalSeconds--;
+            document.getElementById('startSound').play().then(() => {
+                clearInterval(interval);
+                interval = setInterval(() => {
+                    if (!paused) {
+                        const mins = Math.floor(totalSeconds / 60);
+                        const secs = totalSeconds % 60;
+                        document.getElementById('display').innerText = ` ${mins} : ${secs} `;
+                        totalSeconds--;
 
-                    if (totalSeconds < 0) {
-                        clearInterval(interval);
-                        document.getElementById('alarmSound').play();
+                        if (totalSeconds < 0) {
+                            clearInterval(interval);
+                            document.getElementById('alarmSound').play();
+                        } else if (totalSeconds < 5) {
+                            document.getElementById(`tickSound${5 - totalSeconds}`).play();
+                        }
                     }
-                }
-            }, 1000);
+                }, 1000);
+            }).catch(error => {
+                console.log("開始音效播放失敗：", error);
+            });
         }
 
         function togglePause() {

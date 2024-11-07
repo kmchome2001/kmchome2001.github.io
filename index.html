@@ -34,20 +34,18 @@ button {
                 <div id="display" class="display-1" style="font-size:250px">00:00</div>
             </div>
         </div>  
+        
         <div class="row">
-                <div class="col-md-10">
+            
+                <div class="col-md-3">
                     <input type="text" id="timeInput" class="form-control mb-2" placeholder="輸入時間 (分:秒)" oninput="updateDisplay();">
-                </div>  
-                <div class="col-md-2">
-                    <!--<button class="btn btn-info" onclick="testSounds()">測試</button>-->
-                    <img src="sound_icon.png" width="32" height="32" onclick="testSounds()">
-                </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12 text-center">
+                </div> 
+            <div class="col-md-9">
                 <button class="btn btn-primary mr-2" onclick="startCountdown()">開始倒數</button>
                 <button class="btn btn-warning mr-2" onclick="togglePause()">暫停/繼續</button>
                 <button class="btn btn-danger" onclick="resetCountdown()">重新倒數</button>
+                <!--<button class="btn btn-info" onclick="testSounds()">測試</button>-->
+                <img src="sound_icon.png" width="32" height="32" onclick="testSounds()">
             </div>    
         </div>
 

@@ -24,19 +24,25 @@ body::after {
     <div class="container mt-5">
         <div class="row">
             <div class="col text-center fs-1">高雄市扯鈴協會</div>
-          </div>
+        </div>
         <div class="row">
             <div class="col-md-12 text-center">
                 <div id="display" class="display-1" style="font-size:300px">00:00</div>
-                <div class="col-md-10">
+            </div>
+        </div>  
+        <div class="row">
+                <div class="col-md-12">
                     <input type="text" id="timeInput" class="form-control mb-2" placeholder="輸入時間 (分:秒)" oninput="updateDisplay();">
-                <button class="btn btn-info" onclick="testSounds()">測試</button></div>
+                    <button class="btn btn-info" onclick="testSounds()">測試</button>
+                </div>
+        </div>
+        <div class="row">
                 <button class="btn btn-primary mr-2" onclick="startCountdown()">開始倒數</button>
                 <button class="btn btn-warning mr-2" onclick="togglePause()">暫停/繼續</button>
                 <button class="btn btn-danger" onclick="resetCountdown()">重新倒數</button>
                 
-            </div>
         </div>
+
         <audio id="alarmSound" src="timeupSound.mp3"></audio>
         <audio id="startSound" src="startSound.mp3"></audio>
         <audio id="tickSound1" src="5Sound.mp3"></audio>

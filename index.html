@@ -18,9 +18,7 @@ body::after {
   position: absolute;
   z-index: -1;   
 }
-display-1 {
-  font-size: 200px;
-}    
+
   </style>    
 <body>
     <div class="container mt-5">
@@ -29,7 +27,7 @@ display-1 {
           </div>
         <div class="row">
             <div class="col-md-12 text-center">
-                <div id="display" class="display-1">00:00</div>
+                <div id="display" class="display-1" style="font-size:300px">00:00</div>
                 <input type="text" id="timeInput" class="form-control mb-2" placeholder="輸入時間 (分:秒)" oninput="updateDisplay();">
                 <button class="btn btn-primary mr-2" onclick="startCountdown()">開始倒數</button>
                 <button class="btn btn-warning mr-2" onclick="togglePause()">暫停/繼續</button>

@@ -79,6 +79,11 @@ button {
         function startCountdown() {
             const timeInput = document.getElementById('timeInput').value;
             const [minutes, seconds] = timeInput.split(':').map(Number);
+            const timePattern = /^\d{1,2}:\d{2}$/;
+            if (!timePattern.test(timeInput)) {
+                document.getElementById('display').innerText = '時間格式不對';
+                return;
+            }
             totalSeconds = (minutes * 60) + seconds;
             elapsedSeconds = 0;
 

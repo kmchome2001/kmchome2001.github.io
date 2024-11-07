@@ -82,7 +82,7 @@ button {
             const [minutes, seconds] = timeInput.split(':').map(Number);
             const timePattern = /^\d{1,2}:\d{2}$/;
             if (!timePattern.test(timeInput)) {
-                document.getElementById('display').innerText = '時間格式不對';
+                alert('時間格式不對');
                 return;
             }
             totalSeconds = (minutes * 60) + seconds;

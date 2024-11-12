@@ -96,7 +96,7 @@ body::after {
 <body>
     <div class="timer">
         <div id="display">00:00</div>
-        <input type="text" id="timeInput" class="form-control mb-2" placeholder="輸入時間 (分:秒)" oninput="updateDisplay()">
+        <input type="text" id="timeInput" class="form-control mb-2" placeholder="輸入時間 (分:秒)" oninput="updateDisplay();" onblur="convertToHalfWidth();">
         <div class="button-group">
             <button class="btn btn-primary" onclick="startCountdown()">開始倒數</button>
             <button class="btn btn-warning" onclick="togglePause()">暫停/繼續</button>
@@ -179,7 +179,12 @@ body::after {
             elapsedSeconds = 0;
             document.getElementById('display').innerText = '00:00';
         }
-
+        function convertToHalfWidth() {
+            const timeInput = document.getElementById('timeInput');
+            timeInput.value = timeInput.value.replace(/[\uFF01-\uFF5E]/g, function(ch) {
+                return String.fromCharCode(ch.charCodeAt(0) - 0xFEE0);
+            }).replace(/\u3000/g, ' ');
+        }
         function testSounds() {
             const sounds = [
                 document.getElementById('startSound'),

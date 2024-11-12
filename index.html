@@ -10,8 +10,6 @@
 
 body {
     font-family: Arial, sans-serif;
-    background: url(106237.gif);
-    opacity: 0.2;
     margin: 0;
     padding: 0;
     display: flex;
@@ -19,6 +17,17 @@ body {
     align-items: center;
     height: 100vh;
     background-color: #f0f0f0;
+}
+body::after {
+  content: "";
+  background: url(106237.gif);
+  opacity: 0.2;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;   
 }
 
 .timer {

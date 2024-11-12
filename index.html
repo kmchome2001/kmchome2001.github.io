@@ -31,17 +31,32 @@ body::after {
 
 .timer {
             text-align: center;
-            background: #fff;
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             display: flex;
             flex-direction: column;
             align-items: center;
+            background: transparent;
         }
 
-        .timer input, .timer button {
+        .timer input {
             margin: 5px 0;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .button-group button {
+            margin: 5px 0;
+        }
+
+        #display {
+            font-size: 4em;
+            margin-bottom: 20px;
         }
 
         /* 手機樣式 */
@@ -49,6 +64,9 @@ body::after {
             .timer {
                 width: 90%;
                 font-size: 1.2em;
+            }
+            #display {
+                font-size: 3em;
             }
         }
 
@@ -58,6 +76,9 @@ body::after {
                 width: 70%;
                 font-size: 1.5em;
             }
+            #display {
+                font-size: 3.5em;
+            }
         }
 
         /* 桌面樣式 */
@@ -65,6 +86,9 @@ body::after {
             .timer {
                 width: 50%;
                 font-size: 2em;
+            }
+            #display {
+                font-size: 4em;
             }
         }
   </style>    

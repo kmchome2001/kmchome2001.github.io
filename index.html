@@ -40,55 +40,43 @@ body::after {
             align-items: center;
         }
 
+        .timer input, .timer button {
+            margin: 5px 0;
+        }
 
-/* 手機樣式 */
-@media (max-width: 600px) {
-    .timer {
-        width: 90%;
-        font-size: 1.2em;
-    }
-}
+        /* 手機樣式 */
+        @media (max-width: 600px) {
+            .timer {
+                width: 90%;
+                font-size: 1.2em;
+            }
+        }
 
-/* 平板樣式 */
-@media (min-width: 601px) and (max-width: 1024px) {
-    .timer {
-        width: 70%;
-        font-size: 1.5em;
-    }
-}
+        /* 平板樣式 */
+        @media (min-width: 601px) and (max-width: 1024px) {
+            .timer {
+                width: 70%;
+                font-size: 1.5em;
+            }
+        }
 
-/* 桌面樣式 */
-@media (min-width: 1025px) {
-    .timer {
-        width: 50%;
-        font-size: 2em;
-    }
-}    
+        /* 桌面樣式 */
+        @media (min-width: 1025px) {
+            .timer {
+                width: 50%;
+                font-size: 2em;
+            }
+        }
   </style>    
 <body>
-    <div class="container align-content center">
-        <!--<div class="row">
-            <div class="col text-center fs-1">高雄市扯鈴協會</div>
-        </div>-->
-        <div class="row timer">
-            <div class="col-md-12">
-                <div id="display" class="display-1" style="font-size:180px">00:00</div>
-            </div>
-        </div>  
-        
-        <div class="row">
-            
-                <div class="col-md-2">
-                    <input type="text" id="timeInput" class="form-control mb-2" placeholder="輸入時間 (分:秒)" oninput="updateDisplay();">
-                </div> 
-            <div class="col-md-10">
-                <button class="btn btn-primary mr-2" onclick="startCountdown()">開始倒數</button>
-                <button class="btn btn-warning mr-2" onclick="togglePause()">暫停/繼續</button>
-                <button class="btn btn-danger" onclick="resetCountdown()">重新倒數</button>
-                <!--<button class="btn btn-info" onclick="testSounds()">測試</button>-->
-                <img src="sound_icon.png" width="32" height="32" onclick="testSounds()">
-            </div>    
-        </div>
+    <div class="timer">
+        <input type="text" id="timeInput" class="form-control mb-2" placeholder="輸入時間 (分:秒)" oninput="updateDisplay()">
+        <button class="btn btn-primary mr-2" onclick="startCountdown()">開始倒數</button>
+        <button class="btn btn-warning mr-2" onclick="togglePause()">暫停/繼續</button>
+        <button class="btn btn-danger mr-2" onclick="resetCountdown()">重新倒數</button>
+        <button class="btn btn-info" onclick="testSounds()">測試音效檔</button>
+        <div id="display" class="mt-3"></div>
+    </div>
 
         <audio id="alarmSound" src="timeupSound.mp3"></audio>
         <audio id="startSound" src="startSound.mp3"></audio>

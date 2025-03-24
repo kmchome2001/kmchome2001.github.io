@@ -164,23 +164,21 @@ function startCountdown() {
     }
 
     interval = setInterval(() => {
-        if (!paused) {
-            const remainingSeconds = totalSeconds - elapsedSeconds;
-            const mins = Math.floor(remainingSeconds / 60);
-            const secs = remainingSeconds % 60;
+                    if (!paused) {
+                        const mins = Math.floor(elapsedSeconds / 60);
+                        const secs = elapsedSeconds % 60;
+                        document.getElementById('display').innerText = ` ${String(mins).padStart(2, '0')} : ${String(secs).padStart(2, '0')} `;
+                        elapsedSeconds++;
 
-            document.getElementById('display').innerText = `${String(mins).padStart(2, '0')} : ${String(secs).padStart(2, '0')}`;
-            
-            if (remainingSeconds === 0) {
-                clearInterval(interval);
-                document.getElementById('alarmSound').play();
-            } else if (remainingSeconds <= 5 && remainingSeconds > 0) {
-                document.getElementById(`tickSound${remainingSeconds}`).play();
-            }
+                        if (elapsedSeconds > totalSeconds) {
+                            clearInterval(interval);
+                            document.getElementById('alarmSound').play();
+                        } else if (totalSeconds - elapsedSeconds < 5) {
+                            document.getElementById(`tickSound${5 - (totalSeconds - elapsedSeconds)}`).play();
+                        }
+                    }
+                }, 1000);
 
-            elapsedSeconds++;
-        }
-    }, 1000);
 }
 
         function togglePause() {

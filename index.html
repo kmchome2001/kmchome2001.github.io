@@ -104,7 +104,13 @@ body::after {
             <img src="sound_icon.png" onclick="testSounds()" alt="測試音效檔" height="64">
         </div>
     </div>
-
+    <div class="timer">
+        
+        <div class="">
+            <input type="checkbox" id="countdownsound" value="N">不執行倒數音效
+            <input type="checkbox" id="timeset" value="N">忽略停止時間
+        </div>
+    </div>
         <audio id="alarmSound" src="timeupSound.mp3"></audio>
         <audio id="startSound" src="startSound.mp3"></audio>
         <audio id="tickSound1" src="5Sound.mp3"></audio>
@@ -132,10 +138,13 @@ body::after {
         }
 
         function startCountdown() {
+            const countdownsound_checkbox = document.getElementById("countdownsound");
+            const timeset_checkbox = document.getElementById("countdownsound");
+  
             const timeInput = document.getElementById('timeInput').value;
             const [minutes, seconds] = timeInput.split(':').map(Number);
             const timePattern = /^\d{1,2}:\d{2}$/;
-            if (!timePattern.test(timeInput)) {
+            if (!timePattern.test(timeInput) && !timeset_checkbox.checked) {
                 alert('時間格式不對');
                 return;
             }

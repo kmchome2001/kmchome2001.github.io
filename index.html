@@ -151,7 +151,10 @@ body::after {
             }
             totalSeconds = (minutes * 60) + seconds;
             elapsedSeconds = 0;
-            interval = setInterval(() => {
+        if(!timeset_checkbox.checked){
+            document.getElementById('startSound').play().then(() => {
+                clearInterval(interval);
+                interval = setInterval(() => {
                     if (!paused) {
                         const mins = Math.floor(elapsedSeconds / 60);
                         const secs = elapsedSeconds % 60;
@@ -166,17 +169,11 @@ body::after {
                         }
                     }
                 }, 1000);
-            
-        if(!timeset_checkbox.checked){
-            document.getElementById('startSound').play().then(() => {
-                clearInterval(interval);
-                
             }).catch(error => {
                 console.log("開始音效播放失敗：", error);
             });
         }
-            
-        
+
         function togglePause() {
             paused = !paused;
             if (!paused) {

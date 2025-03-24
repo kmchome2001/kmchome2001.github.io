@@ -138,41 +138,50 @@ body::after {
             }
         }
 
-        function startCountdown() {
-            const countdownsound_checkbox = document.getElementById("countdownsound");
-            const timeset_checkbox = document.getElementById("countdownsound");
-  
-            const timeInput = document.getElementById('timeInput').value;
-            const [minutes, seconds] = timeInput.split(':').map(Number);
-            const timePattern = /^\d{1,2}:\d{2}$/;
-            if (!timePattern.test(timeInput) && !timeset_checkbox.checked) {
-                alert('時間格式不對');
-                return;
-            }
-            totalSeconds = (minutes * 60) + seconds;
-            elapsedSeconds = 0;
-        if(!timeset_checkbox.checked){
-            document.getElementById('startSound').play().then(() => {
-                clearInterval(interval);
-                interval = setInterval(() => {
-                    if (!paused) {
-                        const mins = Math.floor(elapsedSeconds / 60);
-                        const secs = elapsedSeconds % 60;
-                        document.getElementById('display').innerText = ` ${String(mins).padStart(2, '0')} : ${String(secs).padStart(2, '0')} `;
-                        elapsedSeconds++;
+function startCountdown() {
+    const countdownsound_checkbox = document.getElementById("countdownsound");
+    const timeset_checkbox = document.getElementById("timeset");
 
-                        if (elapsedSeconds > totalSeconds) {
-                            clearInterval(interval);
-                            document.getElementById('alarmSound').play();
-                        } else if (totalSeconds - elapsedSeconds < 5) {
-                            document.getElementById(`tickSound${5 - (totalSeconds - elapsedSeconds)}`).play();
-                        }
-                    }
-                }, 1000);
-            }).catch(error => {
-                console.log("開始音效播放失敗：", error);
-            });
+    const timeInput = document.getElementById('timeInput').value;
+    const timePattern = /^\d{1,2}:\d{2}$/;
+
+    if (!timePattern.test(timeInput) && !timeset_checkbox.checked) {
+        alert('時間格式不正確');
+        return;
+    }
+
+    const [minutes, seconds] = timeInput.split(':').map(Number);
+    totalSeconds = (minutes * 60) + seconds;
+    elapsedSeconds = 0;
+
+    clearInterval(interval); // 確保沒有重複的 interval
+
+    // 撥放 `startSound` 前檢查 `countdownsound` 是否被勾選
+    if (!countdownsound_checkbox.checked) {
+        document.getElementById('startSound').play().catch(error => {
+            console.log("開始音效播放失敗：", error);
+        });
+    }
+
+    interval = setInterval(() => {
+        if (!paused) {
+            const remainingSeconds = totalSeconds - elapsedSeconds;
+            const mins = Math.floor(remainingSeconds / 60);
+            const secs = remainingSeconds % 60;
+
+            document.getElementById('display').innerText = `${String(mins).padStart(2, '0')} : ${String(secs).padStart(2, '0')}`;
+            
+            if (remainingSeconds === 0) {
+                clearInterval(interval);
+                document.getElementById('alarmSound').play();
+            } else if (remainingSeconds <= 5 && remainingSeconds > 0) {
+                document.getElementById(`tickSound${remainingSeconds}`).play();
+            }
+
+            elapsedSeconds++;
         }
+    }, 1000);
+}
 
         function togglePause() {
             paused = !paused;

@@ -232,11 +232,11 @@ function startCountdown() {
         }
 
 document.addEventListener('keydown', function(event) {
-    if (event.altKey && event.key === '0') {
+    if (event.ctrlKey && event.key === '0') {
         startCountdown(); // 執行倒數計時功能
         console.log("ALT 和 0 被按下，已啟動計時");
     }   
-    if (event.altKey && event.key === '5') {
+    if (event.ctrlKey && event.key === '5') {
         resetCountdown(); // 執行倒數計時功能
         console.log("ALT 和 5 被按下，已重新計時");
     }   
